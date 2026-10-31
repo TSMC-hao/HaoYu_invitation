@@ -1,0 +1,992 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>晧宇 & 琇瑩 | 日式和風婚禮邀請函</title>
+  
+  <!-- Open Graph 標籤 -->
+  <meta property="og:title" content="晧宇 & 琇瑩 婚禮邀請函 | 2026.11.22">
+  <meta property="og:description" content="誠摯邀請您參與我們的和風婚禮見證與盛宴。">
+  <meta property="og:image" content="https://docs.google.com/drawings/d/e/2PACX-1vQqbtmFQ38WwWnhgorL-m_iwagQsdc8CcPO9CsEASQsfiHZfNjahxxm3Pd0OnAW38o75dsUlfj46jJQ/pub?w=960&h=720">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: 日式優雅明朝體 Shippori Mincho + Zen Kaku Gothic + 思源宋體 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+TC:wght@400;600;700;900&family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            kinari: {
+              50: '#FDFCF9',
+              100: '#FAF7F0',
+              200: '#F3EEDF',
+              DEFAULT: '#FBF9F5', /* 和紙生成色底色 */
+              400: '#E8DEC7',
+            },
+            mizuhiki: {
+              50: '#FAF0F0',
+              100: '#F5DDDE',
+              light: '#CD4A4A',
+              DEFAULT: '#B33838', /* 日本慶典水引茜紅 */
+              dark: '#8C2424',
+              deep: '#691515',
+            },
+            wabori: {
+              gold: '#C79F5E', /* 蒔繪金箔色 */
+              goldlight: '#EAD7AF',
+              golddark: '#9A7535',
+            },
+            sumi: {
+              50: '#F6F5F5',
+              100: '#ECE9E8',
+              200: '#D5D0CE',
+              400: '#8A8482',
+              light: '#5A5553',
+              DEFAULT: '#262423', /* 和墨濡羽黑 */
+            }
+          },
+          fontFamily: {
+            serif: ['"Shippori Mincho"', '"Noto Serif TC"', 'serif'],
+            sans: ['"Zen Kaku Gothic New"', '"Noto Sans TC"', 'sans-serif'],
+            display: ['"Shippori Mincho"', '"Cormorant Garamond"', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #FBF9F5;
+      color: #262423;
+      font-family: 'Zen Kaku Gothic New', 'Noto Sans TC', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      touch-action: manipulation;
+    }
+
+    /* 和紙微質地漸層背景 */
+    .washi-bg {
+      background-color: #FBF9F5;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(234, 215, 175, 0.25) 0px, transparent 50%),
+        radial-gradient(at 100% 10%, rgba(179, 56, 56, 0.06) 0px, transparent 45%),
+        radial-gradient(at 50% 100%, rgba(199, 159, 94, 0.12) 0px, transparent 60%);
+    }
+
+    /* 日式和紙質感卡片（細膩墨線與雙重和風邊框） */
+    .washi-card {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(199, 159, 94, 0.32);
+      box-shadow: 0 10px 30px -4px rgba(38, 36, 35, 0.04), 0 2px 8px -2px rgba(179, 56, 56, 0.03);
+      position: relative;
+    }
+
+    .washi-card::after {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border: 1px solid rgba(199, 159, 94, 0.15);
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
+    /* 日式朱印印章 (落款風) */
+    .hanko-stamp {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #B33838;
+      color: #B33838;
+      border-radius: 4px;
+      font-family: 'Shippori Mincho', serif;
+      font-weight: 700;
+      position: relative;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: inset 0 0 4px rgba(179, 56, 56, 0.2);
+    }
+
+    /* 唱片旋轉動畫 */
+    .music-disc.playing {
+      animation: spin 10s linear infinite;
+    }
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    /* 人臉智能焦點相框 */
+    .smart-avatar-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 9999px;
+    }
+    .smart-avatar-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: object-position 0.4s ease, transform 0.4s ease;
+    }
+
+    /* 日式幾何紋樣金線 (和風分隔線) */
+    .washi-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .washi-divider::before, .washi-divider::after {
+      content: '';
+      height: 1px;
+      width: 48px;
+      background: linear-gradient(90deg, transparent, #C79F5E, transparent);
+    }
+
+    /* 直書裝飾文字 */
+    .tate-gaki {
+      writing-mode: vertical-rl;
+      letter-spacing: 0.35em;
+    }
+  </style>
+</head>
+<body class="washi-bg min-h-screen text-sumi relative">
+
+  <!-- 浮動背景音樂控制器 (日式和紙膠囊鈕) -->
+  <div class="fixed top-4 right-4 z-50 flex items-center space-x-2">
+    <button id="musicToggleBtn" 
+            aria-label="背景音樂開關"
+            class="group flex items-center bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-wabori-gold/40 hover:border-mizuhiki shadow-sm transition-all duration-300">
+      <div id="musicDiscIcon" class="music-disc w-5 h-5 rounded-full bg-gradient-to-tr from-mizuhiki to-wabori-gold flex items-center justify-center mr-2 border border-white shadow-xs">
+        <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+        </svg>
+      </div>
+      <span id="musicStatusText" class="text-[11px] font-serif font-medium tracking-widest text-sumi">祝音 ON</span>
+    </button>
+  </div>
+
+  <!-- 主容器 (寬裕和風雜誌留白) -->
+  <main class="w-full max-w-5xl mx-auto min-h-screen px-4 sm:px-6 md:px-10 py-8 md:py-14">
+    
+    <!-- 1. 頂部浪漫歡迎詞區塊（日式結び・和の慶び） -->
+    <header class="w-full text-center pt-4 pb-10 md:pb-14 relative">
+      
+      <!-- 日式水引（結び切り）SVG 圖騰 -->
+      <div class="flex justify-center mb-4">
+        <svg class="w-28 h-10 text-mizuhiki" viewBox="0 0 160 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <!-- 象徵永不解開的祝儀水引繩結 -->
+          <path d="M10 24 C45 24, 60 12, 80 24 C100 36, 115 24, 150 24" stroke="#B33838"/>
+          <path d="M10 27 C45 27, 60 15, 80 27 C100 39, 115 27, 150 27" stroke="#C79F5E"/>
+          <circle cx="80" cy="25.5" r="4.5" fill="#B33838" stroke="#FFFFFF" stroke-width="1.5"/>
+        </svg>
+      </div>
+
+      <!-- 和風標題徽章 -->
+      <div class="inline-flex items-center space-x-2.5 mb-4 px-4 py-1 rounded-full border border-wabori-gold/40 bg-white/80 shadow-2xs">
+        <span class="hanko-stamp px-1.5 py-0.5 text-[10px] tracking-widest leading-none">寿</span>
+        <span class="text-xs font-serif tracking-[0.35em] text-sumi font-semibold">
+          御披露宴 の ご案内
+        </span>
+      </div>
+
+      <h2 class="text-xs sm:text-sm tracking-[0.45em] uppercase text-wabori-golddark font-serif mb-3 font-semibold">
+        SAVE OUR DATE
+      </h2>
+      
+      <!-- 新人名字（明朝體 + 典雅日式連結） -->
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-sumi tracking-tight mb-4">
+        晧宇 <span class="text-mizuhiki font-serif font-normal text-2xl sm:text-3xl md:text-4xl mx-2">と</span> 琇瑩
+      </h1>
+
+      <!-- 和風三點金花分隔 -->
+      <div class="washi-divider my-5">
+        <span class="w-1.5 h-1.5 rotate-45 bg-wabori-gold"></span>
+      </div>
+
+      <!-- 日式優雅詩詞邀請 -->
+      <div class="max-w-md mx-auto text-sumi-light text-[15px] sm:text-base leading-relaxed tracking-wide space-y-1.5 font-serif">
+        <p>めぐり逢えた奇跡を、かけがえのないご縁に。</p>
+        <p>在億萬人之中遇見彼此，許諾攜手餘生溫潤歲月。</p>
+        <p class="pt-3 text-xs sm:text-sm font-serif font-bold text-mizuhiki tracking-[0.28em]">
+          令和八年 · 2026 . 11 . 22 佳日
+        </p>
+      </div>
+    </header>
+
+    <!-- 響應式雙欄佈局：在 iPad/桌面左右舒展，手機為清爽單欄 -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- 左側欄：主婚紗寫真與新人介紹 -->
+      <div class="lg:col-span-7 space-y-8">
+        
+        <!-- 2. 婚紗大圖區塊（和紙金框精緻裝裱） -->
+        <section class="w-full">
+          <a 
+            href="https://chingwang.smugmug.com/%E4%BA%A4%E5%BB%BA%E5%8D%80/HAOJOY-%E6%9D%B1%E4%BA%AC/%E6%94%9D%E5%BD%B1%E5%B8%AB%E7%B2%BE%E9%81%B8%E7%B2%BE%E4%BF%AE" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            title="點擊查看完整婚紗相簿"
+            class="block group relative p-3.5 rounded-2xl washi-card transition duration-500 hover:border-wabori-gold cursor-pointer">
+
+            <div class="relative overflow-hidden rounded-xl aspect-[4/3] bg-kinari-100 flex items-center justify-center border border-wabori-gold/20">
+              <img 
+                id="mainWeddingImg"
+                src="https://docs.google.com/drawings/d/e/2PACX-1vQqbtmFQ38WwWnhgorL-m_iwagQsdc8CcPO9CsEASQsfiHZfNjahxxm3Pd0OnAW38o75dsUlfj46jJQ/pub?w=960&h=720" 
+                alt="晧宇與琇瑩 婚紗精選合照" 
+                loading="lazy"
+                onerror="this.onerror=null; this.src='wedding-photo.jpg'; this.classList.add('fallback-loaded');"
+                class="w-full h-full object-cover object-center transition duration-700 ease-out group-hover:scale-105"
+              />
+              <div class="absolute inset-0 bg-sumi/25 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                <span class="bg-white/95 backdrop-blur-sm text-xs font-serif font-semibold px-4 py-2 rounded-full text-mizuhiki shadow-md border border-wabori-gold/50">
+                  写真集を閲覧する ↗
+                </span>
+              </div>
+            </div>
+
+            <div class="pt-3 pb-1 text-center">
+              <p class="font-serif text-xs text-wabori-golddark tracking-[0.25em]">二人の永遠の誓い · With Everlasting Love</p>
+            </div>
+          </a>
+        </section>
+
+        <!-- 3. 新郎與新娘介紹專區 (日式家紋圓框與人臉智慧對齊) -->
+        <section class="w-full rounded-2xl p-6 sm:p-8 washi-card">
+          <div class="text-center mb-6">
+            <span class="text-[11px] uppercase tracking-[0.35em] text-wabori-golddark font-serif font-semibold block">THE HAPPY COUPLE</span>
+            <h3 class="text-xl font-serif font-bold text-sumi mt-1 tracking-wider">新郎新婦 御紹介</h3>
+            <div class="washi-divider my-2">
+              <span class="w-1.5 h-1.5 rotate-45 bg-mizuhiki"></span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4 sm:gap-6 items-center">
+            <!-- 新郎：晧宇 -->
+            <div class="flex flex-col items-center text-center">
+              <div class="relative w-28 h-28 sm:w-36 sm:h-36 p-1 rounded-full bg-gradient-to-tr from-wabori-gold via-kinari-200 to-mizuhiki shadow-sm">
+                <div class="smart-avatar-container bg-kinari-100 border-2 border-white">
+                  <img 
+                    id="groomImg"
+                    src="https://docs.google.com/drawings/d/e/2PACX-1vQYOCDoBEZsQagtoHlHC3IXSRR1kUNqOtj8jy9ZfJJv1K1CMzVuhixDdg2DBK7lLomMIAmSA6fUxvEj/pub?w=372&h=710" 
+                    alt="新郎 晧宇" 
+                    crossorigin="anonymous"
+                    loading="lazy"
+                    onerror="this.onerror=null; this.src='https://placehold.co/400x400/FAF7F0/B33838?text=Groom+HaoYu';"
+                    class="smart-avatar-img"
+                    style="object-position: center 12%; transform: scale(1.18);"
+                  />
+                </div>
+              </div>
+              <span class="mt-3 text-[11px] tracking-[0.25em] font-serif text-mizuhiki font-semibold">新郎 · GROOM</span>
+              <h4 class="text-lg sm:text-xl font-serif font-bold text-sumi mt-0.5">晧宇</h4>
+              <p class="text-xs sm:text-sm text-sumi-light mt-1 font-serif leading-relaxed">執子之手，一生珍惜</p>
+            </div>
+
+            <!-- 新娘：琇瑩 -->
+            <div class="flex flex-col items-center text-center">
+              <div class="relative w-28 h-28 sm:w-36 sm:h-36 p-1 rounded-full bg-gradient-to-tr from-mizuhiki via-kinari-200 to-wabori-gold shadow-sm">
+                <div class="smart-avatar-container bg-kinari-100 border-2 border-white">
+                  <img 
+                    id="brideImg"
+                    src="https://docs.google.com/drawings/d/e/2PACX-1vTcAK1TXtBMCoOTMDJYv0bJ8AYQSlPeK6HtgnAoLM3-u23q3HJm9r26v1rE5RwS57ihwQ1mgIxZa7Rg/pub?w=318&h=722" 
+                    alt="新娘 琇瑩" 
+                    crossorigin="anonymous"
+                    loading="lazy"
+                    onerror="this.onerror=null; this.src='https://placehold.co/400x400/FAF7F0/B33838?text=Bride+XiuYing';"
+                    class="smart-avatar-img"
+                    style="object-position: center 10%; transform: scale(1.18);"
+                  />
+                </div>
+              </div>
+              <span class="mt-3 text-[11px] tracking-[0.25em] font-serif text-mizuhiki font-semibold">新婦 · BRIDE</span>
+              <h4 class="text-lg sm:text-xl font-serif font-bold text-sumi mt-0.5">琇瑩</h4>
+              <p class="text-xs sm:text-sm text-sumi-light mt-1 font-serif leading-relaxed">與你同心，歲月皆甜</p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- 右側欄：倒數計時、時程軸、地點地圖與 LINE -->
+      <div class="lg:col-span-5 space-y-8">
+
+        <!-- 4. 婚禮倒數計時區塊 (和風木牌感卡片) -->
+        <section class="w-full rounded-2xl p-6 washi-card text-center">
+          <span class="text-[11px] uppercase tracking-[0.3em] text-wabori-golddark font-serif font-semibold">COUNTDOWN</span>
+          <h3 class="text-sm font-serif text-sumi mt-1 mb-4 tracking-wider">佳き日 までのカウントダウン</h3>
+          
+          <div class="grid grid-cols-4 gap-2 sm:gap-3 text-center">
+            <div class="bg-kinari-50 py-3 px-1 rounded-xl border border-wabori-gold/30 shadow-2xs">
+              <span id="countDays" class="block text-2xl font-serif font-bold text-mizuhiki">--</span>
+              <span class="text-[10px] font-serif text-sumi-light tracking-widest">日</span>
+            </div>
+            <div class="bg-kinari-50 py-3 px-1 rounded-xl border border-wabori-gold/30 shadow-2xs">
+              <span id="countHours" class="block text-2xl font-serif font-bold text-mizuhiki">--</span>
+              <span class="text-[10px] font-serif text-sumi-light tracking-widest">時間</span>
+            </div>
+            <div class="bg-kinari-50 py-3 px-1 rounded-xl border border-wabori-gold/30 shadow-2xs">
+              <span id="countMinutes" class="block text-2xl font-serif font-bold text-mizuhiki">--</span>
+              <span class="text-[10px] font-serif text-sumi-light tracking-widest">分</span>
+            </div>
+            <div class="bg-kinari-50 py-3 px-1 rounded-xl border border-wabori-gold/30 shadow-2xs">
+              <span id="countSeconds" class="block text-2xl font-serif font-bold text-mizuhiki">--</span>
+              <span class="text-[10px] font-serif text-sumi-light tracking-widest">秒</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. 婚禮時間流程區塊 (日式水引節點時間軸) -->
+        <section class="w-full rounded-2xl p-6 sm:p-7 washi-card">
+          <div class="text-center mb-6">
+            <span class="text-[11px] uppercase tracking-[0.3em] text-wabori-golddark font-serif font-semibold block">TIMELINE</span>
+            <h3 class="text-xl sm:text-2xl font-serif font-bold text-sumi mt-1">当日 の 流れ</h3>
+            <p class="text-xs text-sumi-light mt-1 tracking-[0.2em] font-serif">2026年 11月 22日（日曜日）</p>
+            <div class="washi-divider my-2">
+              <span class="w-1.5 h-1.5 rotate-45 bg-wabori-gold"></span>
+            </div>
+          </div>
+
+          <!-- 垂直和風時間軸 -->
+          <div class="relative border-l-2 border-wabori-gold/40 ml-4 pl-6 space-y-6 text-left my-4">
+            
+            <!-- 項目 1：誓言見證 10:30 -->
+            <div class="relative group">
+              <div class="absolute -left-[31px] top-1.5 w-3.5 h-3.5 rounded-full bg-mizuhiki border-2 border-white shadow-xs"></div>
+              <div class="flex items-baseline space-x-2">
+                <span class="text-lg font-serif font-bold text-mizuhiki">10:30</span>
+                <span class="text-base font-serif font-bold text-sumi">誓言見證 · 人前挙式</span>
+              </div>
+              <p class="text-sm text-sumi-light mt-0.5 font-serif">在至親好友面前，許下一生永恆承諾</p>
+              
+              <!-- 證婚重要訊息按鈕（點一下即開彈窗，100% 不受瀏覽器阻擋） -->
+              <div class="mt-2.5">
+                <button 
+                  type="button"
+                  id="openCeremonyModalBtn"
+                  class="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-lg bg-mizuhiki-50 border border-mizuhiki/40 text-mizuhiki hover:bg-mizuhiki hover:text-white active:scale-95 transition-all duration-150 text-xs font-serif font-semibold shadow-2xs cursor-pointer">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                  <span>參加證婚點這裡 ↗</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 項目 2：午宴入席 11:30 -->
+            <div class="relative group">
+              <div class="absolute -left-[31px] top-1.5 w-3.5 h-3.5 rounded-full bg-wabori-gold border-2 border-white shadow-xs"></div>
+              <div class="flex items-baseline space-x-2">
+                <span class="text-lg font-serif font-bold text-wabori-golddark">11:30</span>
+                <span class="text-base font-serif font-bold text-sumi">午宴入席 · 迎賓受付け</span>
+              </div>
+              <p class="text-sm text-sumi-light mt-0.5 font-serif">迎賓引導入座，享受雅緻微醺與琴聲相伴</p>
+            </div>
+
+            <!-- 項目 3：午宴開席 12:12 -->
+            <div class="relative group">
+              <div class="absolute -left-[31px] top-1.5 w-3.5 h-3.5 rounded-full bg-mizuhiki-light border-2 border-white shadow-xs"></div>
+              <div class="flex items-baseline space-x-2">
+                <span class="text-lg font-serif font-bold text-mizuhiki">12:12</span>
+                <span class="text-base font-serif font-bold text-sumi">午宴開席 · 披露宴開始</span>
+              </div>
+              <p class="text-sm text-sumi-light mt-0.5 font-serif">美酒佳餚盛宴展開，與新人舉杯同歡</p>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 6. 宴客地點資訊與日式互動按鈕 -->
+        <section class="w-full rounded-2xl p-6 sm:p-7 washi-card">
+          <div class="text-center mb-5">
+            <span class="text-[11px] uppercase tracking-[0.3em] text-wabori-golddark font-serif font-semibold block">LOCATION &amp; ACCESS</span>
+            <h3 class="text-xl sm:text-2xl font-serif font-bold text-sumi mt-1">会場のご案内</h3>
+            <div class="washi-divider my-2">
+              <span class="w-1.5 h-1.5 rotate-45 bg-wabori-gold"></span>
+            </div>
+          </div>
+
+          <!-- 地點資訊卡片 -->
+          <div class="bg-kinari-50 p-4 rounded-xl border border-wabori-gold/30 text-center mb-6">
+            <h4 class="text-lg font-serif font-bold text-sumi tracking-wide mb-1">
+              國家歌劇院 5樓 VVG餐廳
+            </h4>
+            <p class="text-xs text-wabori-golddark font-serif mb-2 font-medium">VVG Food Play &amp; Bar 好樣食藝</p>
+            
+            <!-- 地址保證手機單行不折行 -->
+            <div class="w-full overflow-x-auto no-scrollbar py-0.5">
+              <p id="venueAddress" class="text-[13px] sm:text-base text-sumi tracking-tight whitespace-nowrap select-all font-serif">
+                臺中市西屯區惠來里惠來路二段101號5樓
+              </p>
+            </div>
+
+            <!-- 一鍵複製地址按鈕 -->
+            <button id="copyAddressBtn" class="mt-3 inline-flex items-center text-xs text-mizuhiki hover:text-mizuhiki-dark font-medium transition py-1.5 px-3.5 rounded-full bg-white border border-mizuhiki/30 shadow-2xs">
+              <svg class="w-3.5 h-3.5 mr-1 text-mizuhiki" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+              </svg>
+              <span id="copyBtnText">複製地址</span>
+            </button>
+          </div>
+
+          <!-- 日式互動按鈕（僅保留 Google 地圖導航） -->
+          <div>
+            <!-- 按鈕 A：Google 地圖導航 (和風茜紅漸層) -->
+            <a 
+              href="https://maps.app.goo.gl/y1qV24aeZKyN3FK27?g_st=ic" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="w-full flex items-center justify-center py-3.5 px-6 rounded-xl bg-gradient-to-r from-mizuhiki via-mizuhiki-dark to-mizuhiki text-white font-serif font-semibold tracking-wider shadow-md hover:opacity-95 active:scale-[0.99] transition duration-200 border border-mizuhiki-dark">
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+              <span>點我開啟 Google 地圖導航</span>
+            </a>
+          </div>
+
+          <!-- LINE 官方好友區塊 -->
+          <div class="mt-8 pt-6 border-t border-wabori-gold/20 flex flex-col items-center text-center">
+            <p class="text-xs sm:text-sm text-sumi-light mb-3 tracking-wide font-serif font-medium">加入官方 Line 找座位、玩遊戲：</p>
+            <a href="https://lin.ee/9yUIHWc" target="_blank" rel="noopener noreferrer" class="hover:opacity-90 active:scale-95 transition-transform duration-200">
+              <img src="https://scdn.line-apps.com/n/line_add_friends/btn/zh-Hant.png" alt="加入好友" height="36" class="h-9 w-auto shadow-2xs rounded">
+            </a>
+          </div>
+
+          <!-- 交通提醒提示（保證單行不折行） -->
+          <div class="mt-6 pt-5 border-t border-wabori-gold/20 text-xs text-sumi-light leading-relaxed space-y-1.5 text-center font-serif overflow-x-auto no-scrollbar">
+            <p class="whitespace-nowrap tracking-tight">🚗 歌劇院備有地下收費停車場（惠來路入口）</p>
+            <p class="whitespace-nowrap tracking-tight">🚄 捷運「市政府站」下車，步行約 10-15 分鐘抵達</p>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- 3.5 婚禮精選影片專區 (移至最下方全幅居中，自適應手機/平板/桌機) -->
+    <section class="w-full max-w-3xl mx-auto mt-10 rounded-2xl p-5 sm:p-8 washi-card text-center">
+      <div class="flex items-center justify-center space-x-2 mb-2">
+        <span class="w-1.5 h-1.5 rotate-45 bg-wabori-gold"></span>
+        <span class="text-[11px] uppercase tracking-[0.3em] text-wabori-golddark font-serif font-semibold">WEDDING CINEMA</span>
+        <span class="w-1.5 h-1.5 rotate-45 bg-wabori-gold"></span>
+      </div>
+      <h4 class="text-lg sm:text-xl font-serif font-bold text-sumi tracking-wide">
+        東京浪漫紀行 · 婚禮精選影片
+      </h4>
+      <p class="text-xs sm:text-sm text-sumi-light mt-1.5 mb-4 font-serif leading-relaxed max-w-md mx-auto">
+        珍藏每一刻心動記憶，與您一同見證我們的幸福篇章
+      </p>
+      
+      <!-- 16:9 響應式影片容器：在手機與平板上皆依比例自動縮放 -->
+      <div id="videoContainer" class="relative w-full aspect-video rounded-xl overflow-hidden border border-wabori-gold/30 shadow-sm bg-stone-900 group max-w-2xl mx-auto">
+        
+        <!-- 影片封面縮圖 -->
+        <img 
+          id="videoPosterImg"
+          src="https://img.youtube.com/vi/RWi4vpDf7Ro/hqdefault.jpg" 
+          alt="婚禮影片預覽"
+          class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+        
+        <!-- 點擊在「當前頁面播放」的互動按鈕 -->
+        <button 
+          type="button"
+          id="inlinePlayBtn"
+          aria-label="在喜帖內播放婚禮影片"
+          class="absolute inset-0 w-full h-full z-10 flex flex-col items-center justify-center bg-gradient-to-t from-sumi/80 via-sumi/30 to-black/30 hover:from-sumi/90 hover:via-sumi/40 transition-all duration-300 cursor-pointer">
+          
+          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-mizuhiki/95 group-hover:bg-mizuhiki text-white flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110 border-2 border-white/90">
+            <svg class="w-8 h-8 sm:w-9 sm:h-9 translate-x-0.5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </div>
+          
+          <span class="mt-3 px-4 py-1.5 rounded-full bg-white/95 backdrop-blur-sm text-mizuhiki text-xs sm:text-sm font-serif font-bold tracking-wider shadow-md border border-wabori-gold/40 flex items-center space-x-1.5">
+            <span>點擊播放精選影片</span>
+          </span>
+        </button>
+
+        <!-- 實際內嵌播放的 iframe (點擊後動態載入) -->
+        <div id="cinemaIframeWrapper" class="absolute inset-0 w-full h-full hidden z-20 bg-black"></div>
+
+      </div>
+
+      <!-- 下方前往 YouTube 觀看按鈕 -->
+      <div class="mt-4">
+        <a 
+          href="https://youtu.be/RWi4vpDf7Ro?si=IxPZSUBggngPMQHV"
+          target="_blank"
+          rel="noopener noreferrer"
+          id="externalCinemaLink"
+          class="inline-flex items-center justify-center space-x-2 px-6 py-2.5 rounded-full bg-kinari-50 hover:bg-mizuhiki-50 border border-wabori-gold/40 text-mizuhiki font-serif font-semibold text-xs sm:text-sm tracking-wider transition-all duration-200 active:scale-95 shadow-2xs cursor-pointer">
+          <svg class="w-4 h-4 text-mizuhiki" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+          </svg>
+          <span>前往 YouTube 觀看全螢幕高畫質 ↗</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 7. 結尾致意與感謝 -->
+    <footer class="w-full text-center py-12 text-sumi-light">
+      <div class="washi-divider mb-4">
+        <span class="w-1.5 h-1.5 rotate-45 bg-mizuhiki"></span>
+      </div>
+      <div class="w-full overflow-x-auto no-scrollbar px-2">
+        <p class="text-[12px] sm:text-sm font-serif font-medium tracking-normal sm:tracking-widest text-sumi whitespace-nowrap">
+          皆様の温かいご来臨を、心よりお待ち申し上げております
+        </p>
+      </div>
+      <p class="text-xs font-serif text-sumi-light mt-1">誠摯期待您的到來與祝福</p>
+      <p class="text-xs font-serif font-bold text-mizuhiki mt-2 tracking-[0.3em]">Hao Yu &amp; Ruan Joy</p>
+      <p class="text-[11px] text-sumi-light/60 mt-4 tracking-wider">© 2026 Hao Yu &amp; Ruan Joy Wedding Invitation</p>
+  </footer>
+
+  </main>
+
+  <!-- 證婚重要訊息：和風全螢幕光箱彈窗 (手機 / LINE 點擊即開，永不被瀏覽器擋) -->
+  <div id="ceremonyModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-sumi/70 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+    <div id="ceremonyModalCard" class="relative w-full max-w-lg bg-white rounded-2xl p-5 sm:p-7 border-2 border-mizuhiki/40 shadow-2xl max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300">
+      
+      <!-- 右上角關閉按鈕 -->
+      <button id="closeCeremonyModalBtn" type="button" aria-label="關閉" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-sumi-50 flex items-center justify-center text-sumi-light hover:text-mizuhiki hover:bg-mizuhiki-50 transition cursor-pointer">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <div class="text-center mb-4 pr-6">
+        <div class="inline-block px-3 py-1 rounded-full bg-mizuhiki text-white text-[11px] font-serif font-bold tracking-widest mb-2 shadow-2xs">
+          重要配合事項
+        </div>
+        <h3 class="text-lg sm:text-xl font-serif font-bold text-mizuhiki">
+          【證婚儀式重要提醒】
+        </h3>
+        <!-- 重新規劃斷句結構，平整分成兩行，徹底消除「開始。」落單情況 -->
+        <div class="mt-3 font-serif text-sumi-light text-xs sm:text-[13px] leading-relaxed space-y-1">
+          <p class="tracking-normal">
+            歌劇院正式開館為 11:30，證婚儀式於 10:30 開始。
+          </p>
+          <p class="text-mizuhiki/90 font-medium tracking-normal">
+            為利全體賓客順利入場，請務必配合以下規範：
+          </p>
+        </div>
+      </div>
+
+      <!-- 提醒條列 -->
+      <div class="space-y-2.5 bg-mizuhiki-50 p-4 rounded-xl border border-mizuhiki/25 text-xs sm:text-sm leading-relaxed font-serif text-sumi">
+        <div class="flex items-start space-x-2">
+          <span class="text-mizuhiki font-bold">🔻</span>
+          <p>請於 <strong class="text-mizuhiki font-bold underline underline-offset-4">10:10～10:20</strong> 準時抵達集合地點。</p>
+        </div>
+        <div class="flex items-start space-x-2">
+          <span class="text-mizuhiki font-bold">🔻</span>
+          <p>集合地點：歌劇院 <strong class="text-mizuhiki bg-white px-2 py-0.5 rounded border border-mizuhiki/30 font-bold">「7號門」</strong>。</p>
+        </div>
+        <div class="flex items-start space-x-2">
+          <span class="text-mizuhiki font-bold">🔻</span>
+          <p><strong class="text-mizuhiki">需準時</strong>，若遲到需等候至 11:30 歌劇院開館才能進場，請大家務必預留交通時間。</p>
+        </div>
+        <div class="flex items-start space-x-2">
+          <span class="text-mizuhiki font-bold">🔻</span>
+          <p class="whitespace-normal sm:whitespace-nowrap tracking-tight">請攜帶<strong class="text-mizuhiki">「個人有效證件」</strong>，進場前由歌劇院工作人員核對身分。</p>
+        </div>
+        <div class="flex items-start space-x-2">
+          <span class="text-mizuhiki font-bold">🔻</span>
+          <p>由歌劇院工作人員統一接應入館，並集體行動，<strong>11:30 前不得隨意走動至其他樓層</strong>。</p>
+        </div>
+      </div>
+
+      <!-- 集合地點圖片指示 -->
+      <div class="mt-4">
+        <div class="flex items-center justify-between mb-1.5">
+          <span class="text-xs font-serif font-bold text-sumi">📍 歌劇院 7 號門集合位置指示圖</span>
+          <a href="https://docs.google.com/drawings/d/e/2PACX-1vShxplArNJ3MU7b3iLnDJd-nZ-DrqXocTrHfmPvOCVFk87z5lD6xBnG3iMtVPDRreBhG5J-XW85vtTp/pub?w=960&h=720" target="_blank" rel="noopener noreferrer" class="text-xs text-mizuhiki hover:underline font-serif font-semibold">
+            開啟原圖 ↗
+          </a>
+        </div>
+        <div class="rounded-xl overflow-hidden border border-wabori-gold/30 shadow-xs bg-kinari-50">
+          <img 
+            src="https://docs.google.com/drawings/d/e/2PACX-1vShxplArNJ3MU7b3iLnDJd-nZ-DrqXocTrHfmPvOCVFk87z5lD6xBnG3iMtVPDRreBhG5J-XW85vtTp/pub?w=960&h=720" 
+            alt="歌劇院 7 號門位置指示圖" 
+            loading="lazy"
+            class="w-full h-auto block"
+          />
+        </div>
+      </div>
+
+      <!-- 底部確認按鈕 -->
+      <div class="mt-5 text-center">
+        <button id="confirmCeremonyModalBtn" type="button" class="w-full py-2.5 px-6 rounded-xl bg-mizuhiki text-white font-serif font-semibold text-xs tracking-wider shadow hover:bg-mizuhiki-dark transition">
+          我已閱讀並知悉
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 全螢幕觸控音樂解鎖提示浮條 (和紙紅印風) -->
+  <div id="musicHintBar" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 z-40 bg-white/95 backdrop-blur-md px-4 py-2 rounded-full border border-wabori-gold/50 shadow-lg flex items-center space-x-2 transition-all duration-500 cursor-pointer">
+    <span class="inline-block w-2 h-2 rounded-full bg-mizuhiki animate-ping"></span>
+    <span class="text-xs font-serif font-medium text-sumi">輕觸螢幕任一處，開啟祝婚雅樂 ♫</span>
+  </div>
+
+  <!-- 全域 Toast 通知回饋 -->
+  <div id="toastNotification" class="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 px-4 py-2 bg-sumi/90 backdrop-blur-md text-white text-xs rounded-full shadow-lg transition-opacity duration-300 opacity-0 pointer-events-none font-serif">
+    <span id="toastMessage">已複製</span>
+  </div>
+
+  <!-- 高相容性 YouTube 音訊播放載具 -->
+  <div class="fixed -top-[9999px] -left-[9999px] w-1 h-1 opacity-0 pointer-events-none overflow-hidden" aria-hidden="true">
+    <iframe 
+      id="ytplayer"
+      width="100" 
+      height="100" 
+      src="https://www.youtube-nocookie.com/embed/qlgEadao-Sk?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=qlgEadao-Sk&playsinline=1&controls=0&disablekb=1&fs=0&modestbranding=1" 
+      title="Wedding Background Music"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allow="autoplay; encrypted-media" 
+      frameborder="0">
+    </iframe>
+  </div>
+
+  <!-- 載入官方 YouTube IFrame API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+
+  <script>
+    /* ==========================================================
+       1. 背景音樂控制邏輯
+       ========================================================== */
+    var ytPlayerInstance = null;
+    var isMusicPlaying = false;
+    var hasInteracted = false;
+
+    function onYouTubeIframeAPIReady() {
+      ytPlayerInstance = new YT.Player('ytplayer', {
+        events: {
+          'onReady': function(event) {
+            // 背景音樂預先靜音備用
+            event.target.mute();
+            event.target.playVideo();
+          },
+          'onStateChange': function(event) {
+            if (event.data === YT.PlayerState.PLAYING) {
+              updateMusicUI(true);
+            } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
+              updateMusicUI(false);
+            }
+          }
+        }
+      });
+    }
+
+    function triggerAudioPlay() {
+      if (ytPlayerInstance && ytPlayerInstance.unMute) {
+        try {
+          ytPlayerInstance.unMute();
+          ytPlayerInstance.setVolume(80);
+          ytPlayerInstance.playVideo();
+          updateMusicUI(true);
+        } catch (e) {}
+      } else {
+        var iframe = document.getElementById('ytplayer');
+        if (iframe && iframe.contentWindow) {
+          iframe.contentWindow.postMessage('{"event":"command","func":"unMute","args":""}', '*');
+          iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+          updateMusicUI(true);
+        }
+      }
+    }
+
+    function triggerAudioPause() {
+      if (ytPlayerInstance && ytPlayerInstance.pauseVideo) {
+        try {
+          ytPlayerInstance.pauseVideo();
+          updateMusicUI(false);
+        } catch (e) {}
+      } else {
+        var iframe = document.getElementById('ytplayer');
+        if (iframe && iframe.contentWindow) {
+          iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+          updateMusicUI(false);
+        }
+      }
+    }
+
+    function updateMusicUI(playing) {
+      isMusicPlaying = playing;
+      var disc = document.getElementById('musicDiscIcon');
+      var statusText = document.getElementById('musicStatusText');
+      if (disc && statusText) {
+        if (playing) {
+          disc.classList.add('playing');
+          statusText.innerText = '祝音 ON';
+        } else {
+          disc.classList.remove('playing');
+          statusText.innerText = '祝音 OFF';
+        }
+      }
+    }
+
+    // 音樂切換鈕
+    var musicToggleBtn = document.getElementById('musicToggleBtn');
+    if (musicToggleBtn) {
+      musicToggleBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        dismissHint();
+        if (isMusicPlaying) {
+          triggerAudioPause();
+          showToast('已暫停祝婚雅樂');
+        } else {
+          triggerAudioPlay();
+          showToast('祝婚雅樂播放中 ♫');
+        }
+      });
+    }
+
+    // 提示列點擊
+    var hintBar = document.getElementById('musicHintBar');
+    function dismissHint() {
+      if (hintBar) {
+        hintBar.classList.add('opacity-0', 'pointer-events-none');
+        setTimeout(function() { hintBar.remove(); }, 500);
+      }
+    }
+    if (hintBar) {
+      hintBar.addEventListener('click', function() {
+        dismissHint();
+        triggerAudioPlay();
+        showToast('祝婚雅樂播放中 ♫');
+      });
+    }
+
+    // 首次點擊螢幕任意處自動解鎖發聲
+    function initialUserGesture() {
+      if (!hasInteracted) {
+        hasInteracted = true;
+        dismissHint();
+        triggerAudioPlay();
+        window.removeEventListener('click', initialUserGesture);
+        window.removeEventListener('touchstart', initialUserGesture);
+      }
+    }
+    window.addEventListener('click', initialUserGesture, { once: true });
+    window.addEventListener('touchstart', initialUserGesture, { once: true });
+
+    /* ==========================================================
+       1.5 影片播放控制：點擊封面在「當前頁面播放」+ 下方按鈕跳轉 YT
+       ========================================================== */
+    var inlinePlayBtn = document.getElementById('inlinePlayBtn');
+    var cinemaWrapper = document.getElementById('cinemaIframeWrapper');
+    var externalCinemaLink = document.getElementById('externalCinemaLink');
+
+    if (inlinePlayBtn && cinemaWrapper) {
+      inlinePlayBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        
+        // 1. 立即暫停喜帖背景音樂
+        triggerAudioPause();
+        showToast('已為您暫停背景音樂 ♫');
+
+        // 2. 在原地動態生成並嵌入 YouTube 播放器
+        var videoId = 'RWi4vpDf7Ro';
+        var embedUrl = 'https://www.youtube-nocookie.com/embed/' + videoId + '?autoplay=1&playsinline=1&rel=0&modestbranding=1';
+        
+        cinemaWrapper.innerHTML = '<iframe class="w-full h-full border-0" src="' + embedUrl + '" title="Wedding Cinema" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>';
+        cinemaWrapper.classList.remove('hidden');
+        inlinePlayBtn.classList.add('hidden');
+      });
+    }
+
+    if (externalCinemaLink) {
+      externalCinemaLink.addEventListener('click', function() {
+        // 點擊下方外部連結時也同步停止背景音樂
+        triggerAudioPause();
+        showToast('已為您暫停背景音樂 ♫');
+      });
+    }
+
+    /* ==========================================================
+       2. 婚禮倒數計時器 (2026/11/22 10:30)
+       ========================================================== */
+    var weddingDate = new Date(2026, 10, 22, 10, 30, 0).getTime();
+
+    function updateCountdown() {
+      var now = new Date().getTime();
+      var distance = weddingDate - now;
+
+      if (distance < 0) {
+        document.getElementById('countDays').innerText = "00";
+        document.getElementById('countHours').innerText = "00";
+        document.getElementById('countMinutes').innerText = "00";
+        document.getElementById('countSeconds').innerText = "00";
+        return;
+      }
+
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('countDays').innerText = days < 10 ? '0' + days : days;
+      document.getElementById('countHours').innerText = hours < 10 ? '0' + hours : hours;
+      document.getElementById('countMinutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+      document.getElementById('countSeconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    /* ==========================================================
+       3. 一鍵複製地址與 Toast 通知
+       ========================================================== */
+    function showToast(message) {
+      var toast = document.getElementById('toastNotification');
+      var toastText = document.getElementById('toastMessage');
+      if (!toast || !toastText) return;
+      toastText.innerText = message;
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      toast.classList.add('opacity-100');
+
+      setTimeout(function() {
+        toast.classList.remove('opacity-100');
+        toast.classList.add('opacity-0', 'pointer-events-none');
+      }, 2500);
+    }
+
+    document.getElementById('copyAddressBtn').addEventListener('click', function() {
+      var addressText = "臺中市西屯區惠來里惠來路二段101號5樓";
+      
+      var tempInput = document.createElement('textarea');
+      tempInput.value = addressText;
+      tempInput.setAttribute('readonly', '');
+      tempInput.style.position = 'absolute';
+      tempInput.style.left = '-9999px';
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      
+      try {
+        var successful = document.execCommand('copy');
+        if (successful) {
+          showToast('地址已複製到剪貼簿！');
+          var btnText = document.getElementById('copyBtnText');
+          btnText.innerText = '已複製！';
+          setTimeout(function() {
+            btnText.innerText = '複製地址';
+          }, 2000);
+        } else {
+          showToast('請手動長按地址複製');
+        }
+      } catch (err) {
+        showToast('請手動長按地址複製');
+      }
+      document.body.removeChild(tempInput);
+    });
+
+    /* ==========================================================
+       4. 人臉智能對齊相框 (避免頭部被裁切)
+       ========================================================== */
+    function applySmartFaceFocus(imgElement, defaultYPercent, scaleFactor) {
+      if (!imgElement) return;
+
+      if (window.FaceDetector) {
+        var detector = new FaceDetector({ maxDetectedFaces: 1, fastMode: true });
+        var runDetection = function() {
+          detector.detect(imgElement).then(function(faces) {
+            if (faces && faces.length > 0) {
+              var face = faces[0].boundingBox;
+              var naturalHeight = imgElement.naturalHeight || imgElement.height;
+              var naturalWidth = imgElement.naturalWidth || imgElement.width;
+              if (naturalHeight > 0 && naturalWidth > 0) {
+                var faceCenterY = face.y + (face.height / 2);
+                var faceCenterX = face.x + (face.width / 2);
+                var pctY = Math.round((faceCenterY / naturalHeight) * 100);
+                var pctX = Math.round((faceCenterX / naturalWidth) * 100);
+                imgElement.style.objectPosition = pctX + '% ' + pctY + '%';
+                imgElement.style.transform = 'scale(' + (scaleFactor || 1.18) + ')';
+              }
+            } else {
+              imgElement.style.objectPosition = 'center ' + defaultYPercent + '%';
+              imgElement.style.transform = 'scale(' + scaleFactor + ')';
+            }
+          }).catch(function() {
+            imgElement.style.objectPosition = 'center ' + defaultYPercent + '%';
+            imgElement.style.transform = 'scale(' + scaleFactor + ')';
+          });
+        };
+
+        if (imgElement.complete) {
+          runDetection();
+        } else {
+          imgElement.addEventListener('load', runDetection);
+        }
+      } else {
+        imgElement.style.objectPosition = 'center ' + defaultYPercent + '%';
+        imgElement.style.transform = 'scale(' + scaleFactor + ')';
+      }
+    }
+
+    var groomImg = document.getElementById('groomImg');
+    var brideImg = document.getElementById('brideImg');
+    applySmartFaceFocus(groomImg, 12, 1.18);
+    applySmartFaceFocus(brideImg, 10, 1.18);
+
+    /* ==========================================================
+       5. 證婚提醒彈窗互動邏輯 (點擊秒開，永不被瀏覽器擋)
+       ========================================================== */
+    var modal = document.getElementById('ceremonyModal');
+    var modalCard = document.getElementById('ceremonyModalCard');
+    var openBtn = document.getElementById('openCeremonyModalBtn');
+    var closeBtn = document.getElementById('closeCeremonyModalBtn');
+    var confirmBtn = document.getElementById('confirmCeremonyModalBtn');
+
+    function openModal() {
+      if (!modal) return;
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      modal.classList.add('opacity-100');
+      if (modalCard) {
+        modalCard.classList.remove('scale-95');
+        modalCard.classList.add('scale-100');
+      }
+      document.body.style.overflow = 'hidden'; // 防止背景滾動
+    }
+
+    function closeModal() {
+      if (!modal) return;
+      modal.classList.remove('opacity-100');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      if (modalCard) {
+        modalCard.classList.remove('scale-100');
+        modalCard.classList.add('scale-95');
+      }
+      document.body.style.overflow = '';
+    }
+
+    if (openBtn) openBtn.addEventListener('click', openModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (confirmBtn) confirmBtn.addEventListener('click', closeModal);
+
+    // 點擊彈窗外圍背景自動關閉
+    if (modal) {
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) closeModal();
+      });
+    }
+  </script>
+</body>
+</html>
+
+```
